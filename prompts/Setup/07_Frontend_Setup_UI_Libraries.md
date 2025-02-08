@@ -1,101 +1,83 @@
 # 07_Frontend_Setup_UI_Libraries.md
 
 **Purpose:**
-This file guides the AI Agent to integrate the specified UI libraries (Shadcn UI, MUI Core, Joy UI Templates, and Planby React Calendar Timeline) into the Next.js frontend project. This includes installing the libraries and setting up basic configurations.
+
+This file instructs the AI agent to set up the necessary UI component libraries for the Veterinary PMS frontend. We will be using a combination of libraries to leverage templates, pre-built components, and customization options.
 
 **Instructions:**
 
-1.  **Install Shadcn UI:**
-    *   Follow the Shadcn UI installation instructions for Next.js (App Router). Refer to the official Shadcn UI documentation for the most up-to-date instructions: [https://ui.shadcn.com/docs/installation/nextjs](https://ui.shadcn.com/docs/installation/nextjs).
-    *   Typically, this involves using `shadcn-ui/init` and then using the `shadcn-ui/cli` to add components as needed.
-    *   Initialize Shadcn UI within your `veterinary-pms-frontend` project:
+1.  **Install MUI Core and Joy UI:**
+    *   Using `npm` or `yarn`, add MUI Core and Joy UI and their dependencies to the Next.js frontend project.
 
-    ```bash
-    npx shadcn-ui@latest init
-    ```
-    *   Accept the default options during initialization (style: `default`, base color: `slate`, CSS variables: `yes`, color palette: `slate`, `utils.ts` location: `src/lib`, import alias: `@/components`).  *(If defaults are different, adjust instructions accordingly.)*
+        ```bash
+        npm install @mui/material @mui/joy @emotion-react @emotion-styled
+        # or
+        yarn add @mui/material @mui/joy @emotion-react @emotion-styled
+        ```
 
-2.  **Install MUI Core (MUI v5 or later):**
-    *   Install MUI Core and its peer dependencies using npm:
+2.  **Install Shadcn UI:**
+    *   Follow the Shadcn UI installation instructions for Next.js projects. This typically involves using `shadcn-ui` CLI to add components as needed.
+    *   Initialize Shadcn UI within your Next.js project if you haven't already:
 
-    ```bash
-    npm install @mui/material @emotion/react @emotion/styled
-    ```
+        ```bash
+        npx shadcn-ui@latest init
+        ```
+    *   Configure Shadcn UI's `tailwind.config.js` and `globals.css` as per Shadcn UI documentation to ensure proper Tailwind CSS integration.
 
-3.  **Install Joy UI Templates (Joy UI is part of MUI):**
-    *   Joy UI is part of MUI, so you likely already installed core dependencies with the previous step.  However, if you need specific Joy UI *templates* or components beyond the core, you might need to install `@mui/joy`.  Let's install `@mui/joy` explicitly to ensure Joy UI components are available:
+3.  **Configure Theme (Initial - Basic MUI Theme):**
+    *   For initial setup, let's configure a basic MUI theme provider in `_app.tsx` (or `_app.js`) to enable MUI styling across the application.  We can customize the theme later.
+    *   Create a basic theme in `src/theme.ts` (or `src/theme/index.ts` if you prefer an index file in a theme directory):
 
-    ```bash
-    npm install @mui/joy
-    ```
+        ```typescript
+        // src/theme.ts (or src/theme/index.ts)
+        import { createTheme } from '@mui/material/styles';
+        import { inter } from './font'; // Assuming you are using the 'inter' font from next/font as in Next.js setup
 
-4.  **Install Planby React Calendar Timeline:**
-    *   Install the `react-calendar-timeline` library and its dependencies:
+        const theme = createTheme({
+          typography: {
+            fontFamily: inter.style.fontFamily,
+          },
+          // ... you can add more theme customizations here later (colors, etc.) ...
+        });
 
-    ```bash
-    npm install react-calendar-timeline moment
-    npm install @types/react-calendar-timeline @types/moment # Optional: Install type definitions if needed
-    ```
+        export default theme;
+        ```
 
-5.  **Configure Tailwind CSS for potential conflicts (if needed):**
-    *   Shadcn UI is based on Tailwind CSS. MUI also has its styling system.  In most cases, they can coexist. However, if you encounter any CSS conflicts or styling issues, you might need to adjust Tailwind CSS configuration or component styling to ensure proper integration.  *(For now, let's assume they will coexist reasonably well with default configurations. If styling conflicts arise later, we can add more specific configuration adjustments here.)*
+    *   Update `_app.tsx` (or `_app.js`) to use the `ThemeProvider` from `@mui/material` and import your theme:
 
-6.  **Basic Component Import Test (Optional Verification):**
-    *   **(Optional):** To verify that the UI libraries are installed correctly, you can try importing a basic component from each library in your `src/app/page.tsx` (or any component file) and see if they render without errors.  For example:
+        ```typescript jsx
+        // _app.tsx
+        import React from 'react';
+        import { ThemeProvider } from '@mui/material/styles';
+        import theme from '../src/theme'; // or '../src/theme/index'
+        import '../styles/globals.css'; // Ensure your global styles are imported
 
-    ```tsx  typescript
-    // src/app/page.tsx (Example - for verification only)
-    import { Button } from '@/components/ui/button' // Shadcn UI Button (adjust import path if needed)
-    import { Button as MUIButton } from '@mui/material'; // MUI Button (rename to avoid conflict)
-    import ButtonJoy from '@mui/joy/Button'; // Joy UI Button
-    import Timeline from 'react-calendar-timeline' // Planby Timeline
+        function MyApp({ Component, pageProps }) {
+          return (
+            <ThemeProvider theme={theme}>
+              <Component {...pageProps} />
+            </ThemeProvider>
+          );
+        }
 
-    export default function HomePage() {
-      return (
-        <div>
-          <h1>Welcome to Veterinary PMS</h1>
-          <Button>Shadcn Button</Button>
-          <MUIButton variant="contained">MUI Button</MUIButton>
-          <ButtonJoy color="primary">Joy UI Button</ButtonJoy>
-          {/* Basic Timeline example - might need more props for full render */}
-          <Timeline groups={[]} items={[]} defaultTimeStart={Date.now()} defaultTimeEnd={Date.now() + 3600 * 1000}/> 
-        </div>
-      )
-    }
-    ```
-    *   **(Important):** This component import test in `page.tsx` is purely for verification. You can remove or comment out this test code after you confirm that the libraries are installed and importable.  You don't need to keep these test components in your actual application code.
+        export default MyApp;
+        ```
 
+4.  **Verify Installation:**
+    *   Run the Next.js development server (`npm run dev` or `yarn dev`).
+    *   Create a simple test page (e.g., `pages/test-ui.tsx`) and import a component from each library (e.g., `<Button>` from `@mui/material`, `<Button>` from `@mui/joy`, a Shadcn UI component like `<Button>`). Render these components on the test page and ensure they are displayed without errors and with basic styling applied, indicating that the libraries are correctly installed and the theme is applied.
 
-**Context:**
+**Expected Outcome:**
 
-*   We are integrating UI libraries to provide pre-built components and styling for our frontend, speeding up development and ensuring a consistent look and feel.
-*   We are integrating Shadcn UI (for utility-first components), MUI (Core and Joy UI for a comprehensive component library), and Planby React Calendar Timeline (for appointment scheduling and visualization).
+*   MUI Core, Joy UI, and Shadcn UI libraries are successfully installed in the Next.js project.
+*   A basic MUI theme is set up and applied to the application.
+*   Verification steps confirm that the UI libraries are working correctly.
 
-**Rules and Constraints:**
+**Post-Verification:**
 
-*   Integrate Shadcn UI, MUI Core, Joy UI Templates, and Planby React Calendar Timeline.
-*   Follow the official installation instructions for each library.
-*   Use `npm` for package installation.
-*   Perform basic verification to ensure libraries are installed and importable.
-*   Address any CSS conflicts or styling issues that may arise during integration (if any).
+*   Provide confirmation that all UI libraries are installed and the basic theme is set up correctly.
+*   Report any errors encountered during installation or verification.
 
-**Details:**
+**Next File:**
 
-*   UI Libraries to install: Shadcn UI, MUI Core (`@mui/material`), Joy UI (`@mui/joy`), `react-calendar-timeline`, `moment`.
-*   Refer to official documentation for each library for specific installation and usage details.
-*   Shadcn UI Installation Doc: [https://ui.shadcn.com/docs/installation/nextjs](https://ui.shadcn.com/docs/installation/nextjs)
-
-**Verification:**
-
-*   After executing these instructions, the AI Agent should confirm:
-    *   Successful initialization of Shadcn UI (`npx shadcn-ui@latest init`).
-    *   Installation of `@mui/material`, `@emotion/react`, `@emotion/styled`, `@mui/joy`, `react-calendar-timeline`, and `moment` npm packages.
-    *   **(Optional):** Successful rendering of basic components from each library in `src/app/page.tsx` (or a test component).
-    *   Confirmation that UI libraries are ready to be used in the project.
-
-**Next Steps (for AI Agent):**
-
-1.  Execute the commands and steps outlined in the "Instructions" section.
-2.  Verify each step as described in the "Verification" section.
-3.  Provide a summary of actions taken and confirmation of successful UI Libraries integration.
-4.  Once confirmed, proceed to the next file: `08_Frontend_Setup_Routing.md`.
+*   Proceed to the next file in the `00_Setup_Control_Center.md` execution plan after successful completion of this file.
