@@ -7,16 +7,40 @@ This file acts as the central control and orchestration point for setting up the
 
 1.  **Execute Setup Files in Order:**  The AI agent must execute the following .md files in the exact numerical order listed below. Do not proceed to the next file until the current file's instructions are fully and successfully completed.
 
-    *   `01_Backend_Setup_NestJS.md`
-    *   `02_Backend_Setup_PostgreSQL.md`
-    *   `03_Backend_Setup_Prisma.md`
-    *   `04_Backend_Setup_Authentication.md`
-    *   `05_Backend_Setup_MultiTenancy.md`
-    *   `06_Frontend_Setup_NextJS.md`
-    *   `07_Frontend_Setup_UI_Libraries.md`
-    *   `08_Frontend_Setup_Routing.md`
-    *   `09_Frontend_Setup_API_Client.md`
-    *   `10_Database_Schema_Design.md`
+    *   `setup/01_Backend_Setup_NestJS.md`
+    *   `setup/02_Backend_Setup_PostgreSQL.md`
+    *   `setup/03_Backend_Setup_Prisma.md`
+    *   `setup/04_Backend_Setup_Authentication.md`
+    *   `setup/05_Backend_Setup_MultiTenancy.md`
+    *   `setup/06_Frontend_Setup_NextJS.md`
+    *   `setup/07_Frontend_Setup_UI_Libraries.md`   
+    *   `setup/08_Frontend_Setup_Routing.md`
+    *   `setup/09_Frontend_Setup_API_Client.md`
+    *   `db/10_Database_Schema_Overview.md` (for general instructions)
+    *   `db/10a_Database_Central_Schema.md`
+    *   `db/10b_Database_Tenant_Dimension_Schema.md`
+    *   `db/10e_Database_Tenant_Lookup_Schema.md` (Lookup tables often have no FK dependencies, can be created early)
+    *   `db/10c_Database_Tenant_Fact_Schema.md` 
+    *   `db/10d_Database_Tenant_Transactional_Schema.md`
+    *   `Appointment Scheduling and Patient Visits/30_AppointmentVisits_Overview.md`
+    *   `Appointment Scheduling and Patient Visits/32_AppointmentVisits_Backend_API.md`
+    *   `Appointment Scheduling and Patient Visits/33_AppointmentVisits_Backend_Services.md`
+    *   `Billing/40_BillingInvoicing_Overview.md`
+    *   `Billing/42_BillingInvoicing_Backend_API.md`
+    *   `Billing/43_BillingInvoicing_Backend_Services.md`
+    *   `Inventory/50_InventoryManagement_Overview.md`
+    *   `Inventory/52_InventoryManagement_Backend_API.md`
+    *   `Inventory/53_InventoryManagement_Backend_Services.md`
+    *   `Reporting/60_ReportingAnalytics_Overview.md`
+    *   `Reporting/62_ReportingAnalytics_Backend_API.md`
+    *   `Reporting/63_ReportingAnalytics_Backend_Services.md`
+    *   `RBAC/70_UserRolesPermissions_Overview.md`
+    *   `RBAC/72_UserRolesPermissions_Backend_API.md`
+    *   `RBAC/73_UserRolesPermissions_Backend_Services.md`
+    
+    
+
+
 
 2.  **Verification after each file:** After the AI agent completes the instructions in each file, it MUST provide a summary of the actions taken and confirmation that the steps were successful.  Wait for explicit confirmation before proceeding to the next file.
 
