@@ -42,6 +42,7 @@ This file acts as the central control and orchestration point for setting up the
 **4. Frontend Features:**
     * `FrontendFeatures/120_FrontendFeatures_Overview.md` *(New file)*
 
+
 **5. Backend Features:**
     * **API Key Management:**
         * `API Key Management/110_ApiKeyManagement_Overview.md`
@@ -93,6 +94,19 @@ This file acts as the central control and orchestration point for setting up the
         * `User Profile Management/102_UserProfileManagement_Backend_API.md`
         * `User Profile Management/103_UserProfileManagement_Backend_Services.md`
     
+    * **Frontend**
+        * `Authentication/130_Authentication_Frontend_Overview.md   `
+        * `Authentication/132_Authentication_Frontend_Components.md`
+        * `Authentication/133_Authentication_Frontend_Pages.md`
+        * `Authentication/134_Authentication_Frontend_API_Integration.md`
+        * `User Profile Management/140_UserProfileManagement_Frontend_Overview.md`
+        * `User Profile Management/142_UserProfileManagement_Frontend_Components.md`
+        * `User Profile Management/143_UserProfileManagement_Frontend_Pages.md`
+        * `User Profile Management/144_UserProfileManagement_Frontend_API_Integration.md`
+
+    
+
+
 
 
 
